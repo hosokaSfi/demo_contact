@@ -13,6 +13,9 @@ from app.database import Base, SessionLocal, engine
 from app.models import inquiry, inquiry_history, user  # noqa: F401
 from app.seed import seed
 
+# create_all がテーブルを作れるよう、モデルを読み込ませる。
+from app.models import inquiry, inquiry_history, user  # noqa: F401
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
