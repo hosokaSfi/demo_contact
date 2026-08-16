@@ -1,5 +1,6 @@
 // お問い合わせの内容を表示する。表示だけなのでServer Component。
 
+import { Card } from "@/app/_components/Card";
 import { StatusBadge } from "@/app/_components/StatusBadge";
 import type { InquiryDetail } from "@/lib/types";
 
@@ -9,9 +10,11 @@ type Props = {
 
 export function InquiryDetailCard({ inquiry }: Props) {
   return (
-    <div className="rounded border p-6">
-      <div className="mb-4 flex items-center gap-3">
-        <h1 className="text-xl font-bold">{inquiry.subject}</h1>
+    <Card>
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <h1 className="text-xl font-bold tracking-tight text-gray-900">
+          {inquiry.subject}
+        </h1>
         <StatusBadge status={inquiry.status} />
       </div>
 
@@ -32,9 +35,9 @@ export function InquiryDetailCard({ inquiry }: Props) {
         <dd>{new Date(inquiry.updated_at).toLocaleString("ja-JP")}</dd>
       </dl>
 
-      <div className="whitespace-pre-wrap rounded bg-gray-50 p-4 text-sm">
+      <div className="whitespace-pre-wrap rounded-lg bg-gray-50 p-4 text-sm">
         {inquiry.body}
       </div>
-    </div>
+    </Card>
   );
 }
