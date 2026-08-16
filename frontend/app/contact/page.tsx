@@ -4,9 +4,10 @@ import { ContactForm } from "./_components/ContactForm";
 
 export default function ContactPage() {
   return (
-    <main className="mx-auto max-w-xl p-8">
-      <h1 className="mb-6 text-2xl font-bold">お問い合わせ</h1>
-      <ContactForm />
+    <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-indigo-50 via-white to-white px-8 py-16">
+      <div className="w-full max-w-xl">
+        <ContactForm />
+      </div>
     </main>
   );
 }
