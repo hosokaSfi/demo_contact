@@ -1,7 +1,6 @@
 // お問い合わせ詳細のページ。内容と対応履歴を表示する。
 
 import { notFound } from "next/navigation";
-import Link from "next/link";
 
 import { AssigneeSelect } from "./_components/AssigneeSelect";
 import { CommentForm } from "./_components/CommentForm";
@@ -10,6 +9,8 @@ import { InquiryDetailCard } from "./_components/InquiryDetailCard";
 import { OperatorProvider } from "./_components/OperatorContext";
 import { OperatorSelect } from "./_components/OperatorSelect";
 import { StatusSelect } from "./_components/StatusSelect";
+import { Card } from "@/app/_components/Card";
+import { PageHeader } from "@/app/_components/PageHeader";
 import { apiGet } from "@/lib/api";
 import type { InquiryDetail, User } from "@/lib/types";
 
@@ -31,36 +32,34 @@ export default async function InquiryDetailPage({ params }: Props) {
   const users = await apiGet<User[]>("/api/users");
 
   return (
-    <main className="mx-auto max-w-3xl p-8">
-      <Link href="/inquiries" className="text-sm text-blue-600 hover:underline">
-        ← 一覧に戻る
-      </Link>
+    <>
+      <PageHeader backHref="/inquiries" backLabel="一覧に戻る" />
 
-      <div className="mt-4">
+      <main className="mx-auto max-w-3xl p-8">
         <InquiryDetailCard inquiry={inquiry} />
-      </div>
 
-      <OperatorProvider users={users}>
-        <section className="mt-6 rounded border p-6">
-          <h2 className="mb-4 text-lg font-bold">対応</h2>
+        <OperatorProvider users={users}>
+          <Card className="mt-6">
+            <h2 className="mb-4 text-lg font-bold text-gray-900">対応</h2>
 
-          <div className="mb-4 flex flex-wrap gap-4">
-            <OperatorSelect />
-            <StatusSelect inquiryId={inquiry.id} currentStatus={inquiry.status} />
-            <AssigneeSelect
-              inquiryId={inquiry.id}
-              currentAssigneeId={inquiry.assignee?.id ?? null}
-            />
-          </div>
+            <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <OperatorSelect />
+              <StatusSelect inquiryId={inquiry.id} currentStatus={inquiry.status} />
+              <AssigneeSelect
+                inquiryId={inquiry.id}
+                currentAssigneeId={inquiry.assignee?.id ?? null}
+              />
+            </div>
 
-          <CommentForm inquiryId={inquiry.id} />
+            <CommentForm inquiryId={inquiry.id} />
+          </Card>
+        </OperatorProvider>
+
+        <section className="mt-8">
+          <h2 className="mb-4 text-lg font-bold text-gray-900">対応履歴</h2>
+          <HistoryTimeline histories={inquiry.histories} />
         </section>
-      </OperatorProvider>
-
-      <section className="mt-8">
-        <h2 className="mb-4 text-lg font-bold">対応履歴</h2>
-        <HistoryTimeline histories={inquiry.histories} />
-      </section>
-    </main>
+      </main>
+    </>
   );
 }

@@ -2,6 +2,7 @@
 
 import { InquiryFilter } from "./_components/InquiryFilter";
 import { InquiryTable } from "./_components/InquiryTable";
+import { PageHeader } from "@/app/_components/PageHeader";
 import { apiGet } from "@/lib/api";
 import type { InquiryListItem, User } from "@/lib/types";
 
@@ -31,18 +32,27 @@ export default async function InquiriesPage({ searchParams }: Props) {
   ]);
 
   return (
-    <main className="mx-auto max-w-5xl p-8">
-      <h1 className="mb-6 text-2xl font-bold">お問い合わせ一覧</h1>
+    <>
+      <PageHeader />
 
-      <div className="mb-4">
-        <InquiryFilter
-          users={users}
-          currentStatus={status}
-          currentAssigneeId={assigneeId}
-        />
-      </div>
+      <main className="mx-auto max-w-5xl p-8">
+        <div className="mb-6 flex items-baseline justify-between">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+            お問い合わせ一覧
+          </h1>
+          <span className="text-sm text-gray-500">{inquiries.length}件</span>
+        </div>
 
-      <InquiryTable inquiries={inquiries} />
-    </main>
+        <div className="mb-4">
+          <InquiryFilter
+            users={users}
+            currentStatus={status}
+            currentAssigneeId={assigneeId}
+          />
+        </div>
+
+        <InquiryTable inquiries={inquiries} />
+      </main>
+    </>
   );
 }
