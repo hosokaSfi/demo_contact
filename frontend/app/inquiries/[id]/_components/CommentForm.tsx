@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { useOperator } from "./OperatorContext";
+import { Button } from "@/app/_components/Button";
 import { apiPost } from "@/lib/api";
 import type { InquiryHistory } from "@/lib/types";
 
@@ -43,19 +44,15 @@ export function CommentForm({ inquiryId }: Props) {
   return (
     <form onSubmit={submit} className="space-y-2">
       <textarea
-        className="w-full rounded border p-2 text-sm"
+        className="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
         rows={3}
         placeholder="対応メモを入力"
         value={body}
         onChange={(e) => setBody(e.target.value)}
       />
-      <button
-        type="submit"
-        disabled={saving || body.trim() === ""}
-        className="rounded bg-blue-600 px-4 py-1.5 text-sm text-white disabled:bg-gray-300"
-      >
+      <Button type="submit" disabled={saving || body.trim() === ""}>
         {saving ? "投稿中..." : "投稿する"}
-      </button>
+      </Button>
     </form>
   );
 }
