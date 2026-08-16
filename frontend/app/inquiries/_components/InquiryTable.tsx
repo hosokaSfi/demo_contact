@@ -14,7 +14,7 @@ type Props = {
 export function InquiryTable({ inquiries }: Props) {
   if (inquiries.length === 0) {
     return (
-      <Card className="flex flex-col items-center py-12 text-center">
+      <Card padding="px-6 py-12" className="flex flex-col items-center text-center">
         <Inbox className="mb-3 h-8 w-8 text-gray-300" />
         <p className="text-gray-500">該当するお問い合わせがありません。</p>
       </Card>
