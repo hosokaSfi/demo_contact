@@ -9,6 +9,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import Base, engine
 
+# create_all がテーブルを作れるよう、モデルを読み込ませる。
+from app.models import inquiry, inquiry_history, user  # noqa: F401
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
