@@ -38,18 +38,23 @@ export function HistoryTimeline({ histories }: Props) {
   }
 
   return (
-    <ol className="space-y-4">
-      {histories.map((history) => (
-        <li key={history.id} className="border-l-2 border-gray-200 pl-4">
+    <ol className="space-y-6">
+      {histories.map((history, index) => (
+        <li key={history.id} className="relative pl-6">
+          <span className="absolute top-1 left-0 h-2 w-2 rounded-full bg-indigo-600" />
+          {index !== histories.length - 1 && (
+            <span className="absolute top-3 left-[3px] h-[calc(100%+1rem)] w-px bg-gray-200" />
+          )}
+
           <div className="text-xs text-gray-500">
             {new Date(history.created_at).toLocaleString("ja-JP")}
             {history.user_name !== null && ` ・ ${history.user_name}`}
           </div>
 
-          <div className="text-sm">{describe(history)}</div>
+          <div className="text-sm text-gray-900">{describe(history)}</div>
 
           {history.body !== null && (
-            <div className="mt-1 whitespace-pre-wrap rounded bg-gray-50 p-3 text-sm">
+            <div className="mt-1 whitespace-pre-wrap rounded-lg bg-gray-50 p-3 text-sm">
               {history.body}
             </div>
           )}

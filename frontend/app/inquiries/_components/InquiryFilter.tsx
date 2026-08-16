@@ -4,6 +4,7 @@
 
 import { useRouter } from "next/navigation";
 
+import { Card } from "@/app/_components/Card";
 import { STATUS_LABELS, type InquiryStatus, type User } from "@/lib/types";
 
 type Props = {
@@ -13,6 +14,9 @@ type Props = {
 };
 
 const STATUSES: InquiryStatus[] = ["open", "in_progress", "pending", "closed"];
+
+const selectClasses =
+  "rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500";
 
 export function InquiryFilter({ users, currentStatus, currentAssigneeId }: Props) {
   const router = useRouter();
@@ -33,11 +37,11 @@ export function InquiryFilter({ users, currentStatus, currentAssigneeId }: Props
   };
 
   return (
-    <div className="flex gap-4">
-      <label className="flex items-center gap-2 text-sm">
+    <Card padding="p-4" className="flex flex-wrap gap-4">
+      <label className="flex items-center gap-2 text-sm text-gray-700">
         対応状況
         <select
-          className="rounded border px-2 py-1"
+          className={selectClasses}
           value={currentStatus}
           onChange={(e) => move(e.target.value, currentAssigneeId)}
         >
@@ -50,10 +54,10 @@ export function InquiryFilter({ users, currentStatus, currentAssigneeId }: Props
         </select>
       </label>
 
-      <label className="flex items-center gap-2 text-sm">
+      <label className="flex items-center gap-2 text-sm text-gray-700">
         担当者
         <select
-          className="rounded border px-2 py-1"
+          className={selectClasses}
           value={currentAssigneeId}
           onChange={(e) => move(currentStatus, e.target.value)}
         >
@@ -65,6 +69,6 @@ export function InquiryFilter({ users, currentStatus, currentAssigneeId }: Props
           ))}
         </select>
       </label>
-    </div>
+    </Card>
   );
 }
