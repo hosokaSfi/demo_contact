@@ -13,8 +13,7 @@ from app.database import Base, SessionLocal, engine
 from app.models import inquiry, inquiry_history, user  # noqa: F401
 from app.seed import seed
 
-# create_all がテーブルを作れるよう、モデルを読み込ませる。
-from app.models import inquiry, inquiry_history, user  # noqa: F401
+from app.routers import inquiry as inquiry_router
 from app.routers import user as user_router
 
 
@@ -44,6 +43,7 @@ app.add_middleware(
 )
 
 app.include_router(user_router.router)
+app.include_router(inquiry_router.router)
 
 
 @app.get("/api/health")
