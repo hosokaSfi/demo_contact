@@ -37,7 +37,7 @@ export function InquiryFilter({ users, currentStatus, currentAssigneeId }: Props
   };
 
   return (
-    <Card className="flex flex-wrap gap-4 p-4">
+    <Card padding="p-4" className="flex flex-wrap gap-4">
       <label className="flex items-center gap-2 text-sm text-gray-700">
         対応状況
         <select
