@@ -37,7 +37,7 @@ export function AssigneeSelect({ inquiryId, currentAssigneeId }: Props) {
     <label className="flex items-center gap-2 text-sm">
       担当者
       <select
-        className="rounded border px-2 py-1"
+        className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:opacity-50"
         value={currentAssigneeId === null ? "" : String(currentAssigneeId)}
         disabled={saving}
         onChange={(e) => change(e.target.value)}

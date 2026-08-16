@@ -11,7 +11,7 @@ export function OperatorSelect() {
     <label className="flex items-center gap-2 text-sm">
       操作者
       <select
-        className="rounded border px-2 py-1"
+        className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
         value={String(operatorId)}
         onChange={(e) => setOperatorId(Number(e.target.value))}
       >

@@ -39,7 +39,7 @@ export function StatusSelect({ inquiryId, currentStatus }: Props) {
     <label className="flex items-center gap-2 text-sm">
       対応状況
       <select
-        className="rounded border px-2 py-1"
+        className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:opacity-50"
         value={currentStatus}
         disabled={saving}
         onChange={(e) => change(e.target.value)}
