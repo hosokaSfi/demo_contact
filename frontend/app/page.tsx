@@ -1,38 +1,36 @@
-"use client";
+// トップページ。管理画面と問い合わせフォームへの入口。
 
-// トップページ。開いたときにバックエンドの /api/health を呼び、その結果を画面に表示する。
-// 疎通確認だけのページなので、問い合わせ管理の機能はまだ何もない。
-
-import { useEffect, useState } from "react";
-import { apiGet } from "@/lib/api";
-
-type Health = { status: string };
+import Link from "next/link";
 
 export default function Home() {
-  const [status, setStatus] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    apiGet<Health>("/api/health")
-      .then((data) => setStatus(data.status))
-      .catch((e: unknown) =>
-        setError(e instanceof Error ? e.message : String(e)),
-      );
-  }, []);
-
   return (
-    <main className="flex min-h-screen items-center justify-center p-8">
-      <div className="text-center">
-        {status && (
-          <p className="text-4xl font-bold text-green-600">API接続：{status}</p>
-        )}
-        {error && (
-          <p className="text-2xl font-bold break-all text-red-600">{error}</p>
-        )}
-        {!status && !error && (
-          <p className="text-2xl text-gray-500">接続中...</p>
-        )}
-      </div>
+    <main className="mx-auto max-w-xl p-8">
+      <h1 className="mb-6 text-2xl font-bold">お問い合わせ管理システム</h1>
+
+      <ul className="space-y-3">
+        <li>
+          <Link
+            href="/inquiries"
+            className="block rounded border p-4 hover:bg-gray-50"
+          >
+            <div className="font-medium">お問い合わせ一覧</div>
+            <div className="text-sm text-gray-500">
+              受け付けたお問い合わせを確認し、対応する
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/contact"
+            className="block rounded border p-4 hover:bg-gray-50"
+          >
+            <div className="font-medium">お問い合わせフォーム</div>
+            <div className="text-sm text-gray-500">
+              お問い合わせを送信する（利用者向け）
+            </div>
+          </Link>
+        </li>
+      </ul>
     </main>
   );
 }
