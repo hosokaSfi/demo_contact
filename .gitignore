@@ -1,0 +1,7 @@
+# Gitで管理しないファイルの一覧。
+
+node_modules/
+.next/
+__pycache__/
+*.db
+.env.local
