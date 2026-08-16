@@ -13,6 +13,10 @@ from app.database import Base, SessionLocal, engine
 from app.models import inquiry, inquiry_history, user  # noqa: F401
 from app.seed import seed
 
+# create_all がテーブルを作れるよう、モデルを読み込ませる。
+from app.models import inquiry, inquiry_history, user  # noqa: F401
+from app.routers import user as user_router
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
@@ -38,6 +42,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(user_router.router)
 
 
 @app.get("/api/health")
