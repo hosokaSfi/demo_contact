@@ -43,7 +43,7 @@ export function HistoryTimeline({ histories }: Props) {
         <li key={history.id} className="relative pl-6">
           <span className="absolute top-1 left-0 h-2 w-2 rounded-full bg-indigo-600" />
           {index !== histories.length - 1 && (
-            <span className="absolute top-3 left-[3px] h-[calc(100%+0.5rem)] w-px bg-gray-200" />
+            <span className="absolute top-3 left-[3px] h-[calc(100%+1rem)] w-px bg-gray-200" />
           )}
 
           <div className="text-xs text-gray-500">
