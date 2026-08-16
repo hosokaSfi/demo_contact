@@ -18,7 +18,7 @@ class Inquiry(Base):
     email: Mapped[str] = mapped_column(String(255))
     subject: Mapped[str] = mapped_column(String(200))
     body: Mapped[str] = mapped_column(Text)
-    status: Mapped[str] = mapped_column(String(20), default="open")
+    status: Mapped[str] = mapped_column(String(20), server_default="open")
     assignee_id: Mapped[int | None] = mapped_column(
         ForeignKey("users.id"), nullable=True
     )
