@@ -11,6 +11,7 @@ from app.database import Base, engine
 
 # create_all がテーブルを作れるよう、モデルを読み込ませる。
 from app.models import inquiry, inquiry_history, user  # noqa: F401
+from app.routers import user as user_router
 
 
 @asynccontextmanager
@@ -30,6 +31,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(user_router.router)
 
 
 @app.get("/api/health")
